@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>index</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/china.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<link rel="stylesheet" href="css/tubiao.css">
+</head>
+<body>
+    <div class="head clearfix">
+        <h1 class="pulll_left"></h1>
+            <div class="menu menu2 pulll_left">
+            <ul>      
+                <li><a href="index.html">主界面</a></li>
+                <li><a href="收入开销图表.html">收入开销图表</a></li>
+                <li><a href="亲友信息.html">亲友信息图表</a></li>
+				<li><a href="大学成绩.html">大学成绩</a></li>
+				<li><a href="大学平均成绩.html">大学平均成绩</a></li>
+                <li><a href="亲友爱好统计.html">亲友爱好统计</a></li>
+            </ul>
+            </div>
+            <div class="time" id="showTime">2024年6月5日 17:00:12</div> 
+            <script>
+              var t = null;
+              t = setTimeout(time, 1000);//開始运行
+              function time() {
+                clearTimeout(t);//清除定时器
+                dt = new Date();
+                var y = dt.getFullYear();
+                var mt = dt.getMonth()+ 1;
+                var day = dt.getDate();
+                var h = dt.getHours();//获取时
+                var m = dt.getMinutes();//获取分
+                var s = dt.getSeconds();//获取秒
+                document.querySelector(".time").innerHTML = 
+                    y +
+                    "年" +
+                    mt +
+                    "月" +
+                    day +
+                    "日 " +
+                    h +
+                    ":" +
+                    m +
+                    ":" +
+                    s +
+                    " ";
+                   t = setTimeout(time, 1000); //设定定时器，循环运行     
+               }
+        
+            </script>
+    </div>
+    <div class="tu2" id="tu2" style="width: 600px; height: 400px; "></div>
+    <div class="tu3" id="tu3"style="width: 600px; height: 400px; "></div>
+            <script>
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1=echarts.init(document.getElementById("tu2"));
+        var option1 = {
+          legend: {
+           orient: 'vertical',
+            itemWidth: 10,
+            itemHeight: 10,
+            textStyle:{
+                color:'rgba(255,255,255,.5)'
+            },
+              top:'25%',
+              left:"75%",
+          right:30,
+            data:['考研','考公','就业','入伍']
+        },
+        color: ['#37a2da','#32c5e9','#9fe6b8','#ffdb5c','#ff9f7f','#fb7293','#e7bcf3','#8378ea'],
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+        },
+       
+        calculable : true,
+        series : [
+            {
+              
+                type:'pie',
+                radius : [20, 70],
+                center: ["38%", "50%"],
+                roseType : 'area',
+                data:[ 
+                    {value:25, name:'考研'},
+                    {value:15, name:'考公'},
+                    {value:13, name:'就业'},
+                    {value:10, name:'入伍'},
+               
+                ],
+                
+                 label: {
+                 normal: {
+                     formatter: function(param) {
+                         return param.name +':\n' + param.value +'\n';
+                     }
+    
+                 }
+             },
+             labelLine: {
+                 normal: {
+                      length:5,
+                      length2:15,
+                     lineStyle: { width: 1}
+                 }
+             },
+    
+             itemStyle: {
+                 normal: {
+                     shadowBlur: 30,
+                     shadowColor: 'rgba(0, 0, 0, 0.4)'
+                 }
+    
+             },
+            }
+        ]
+    };
+                var myChart2=echarts.init(document.getElementById("tu3"))
+                var option2 = {
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b} : {c}%'
+  },
+  color: ['#37a2da','#9fe6b8','#ffdb5c','#ff9f7f','#fb7293','#e7bcf3','#8378ea'],
+  toolbox: {
+    top:'25%',
+    left:"75%",
+    right:30,
+     orient: 'vertical',
+     feature: {
+      dataView: { readOnly: false },
+      restore: {},
+      saveAsImage: {}
+    }
+  },
+  legend: {
+            itemWidth: 10,
+            itemHeight: 10,
+            textStyle:{
+                color:'rgba(255,255,255,.5)'
+            },
+              top:'3%',
+              left:"76%",
+          right:30,
+          data: ['考研','考公','就业','入伍'],
+          orient: 'vertical',
+  },
+  series: [
+    {
+      name: '班级成员毕业规划',
+      type: 'funnel',
+      left: '10%',
+      top: 60,
+      bottom: 60,
+      width: '60%',
+      min: 0,
+      max: 50,
+      minSize: '0%',
+      maxSize: '100%',
+      sort: 'descending',
+      gap: 2,
+      label: {
+        show: true,
+        position: 'inside'
+      },
+      labelLine: {
+        length: 10,
+        lineStyle: {
+          width: 1,
+          type: 'solid'
+        }
+      },
+      
+      itemStyle: {
+                 normal: {
+                     shadowBlur: 30,
+                     shadowColor: 'rgba(0, 0, 0, 0.4)'
+                 },
+            borderWidth: 1,
+            borderColor: '#fff',
+             },
+      emphasis: {
+        label: {
+          fontSize: 20
+        }
+      },
+      data: [   
+      {value:25, name:'考研'},
+      {value:15, name:'考公'},
+      {value:13, name:'就业'},
+      {value:10, name:'入伍'}          
+      ]
+    }
+  ]
+};
+    myChart1.setOption(option1);// 为myChart1对象加载数据
+    myChart2.setOption(option2);// 为myChart2对象加载数据
+    // 多图表联动配置方法1：分别设置每个echarts对象的group值
+    myChart1.group='group1';
+    myChart2.group='group1';
+    echarts.connect('group1');
+    // 多图表联动配置方法2：直接传入需要联动的echarts对象myChart1，myChart2
+	echarts.connect([myChart1,myChart2]);
+    
+            </script>
+            
+        </div>
+</body> 
+</html>

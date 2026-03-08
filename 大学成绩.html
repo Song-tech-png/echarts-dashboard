@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>index</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/china.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<link rel="stylesheet" href="css/tubiao.css">
+</head>
+<body>
+    <div class="head clearfix">
+        <h1 class="pulll_left"></h1>
+            <div class="menu menu2 pulll_left">
+            <ul>      
+                <li><a href="index.html">主界面</a></li>
+                <li><a href="收入开销图表.html">收入开销图表</a></li>
+                <li><a href="亲友信息.html">亲友信息图表</a></li>
+                <li><a href="大学平均成绩.html">大学平均成绩</a></li>
+                <li><a href="班级毕业规划.html">班级毕业规划</a></li>
+                <li><a href="亲友爱好统计.html">亲友爱好统计</a></li>
+            </ul>
+            </div>
+            <div class="time" id="showTime">2024年6月5日 17:00:12</div> 
+            <script>
+              var t = null;
+              t = setTimeout(time, 1000);//開始运行
+              function time() {
+                clearTimeout(t);//清除定时器
+                dt = new Date();
+                var y = dt.getFullYear();
+                var mt = dt.getMonth()+ 1;
+                var day = dt.getDate();
+                var h = dt.getHours();//获取时
+                var m = dt.getMinutes();//获取分
+                var s = dt.getSeconds();//获取秒
+                document.querySelector(".time").innerHTML = 
+                    y +
+                    "年" +
+                    mt +
+                    "月" +
+                    day +
+                    "日 " +
+                    h +
+                    ":" +
+                    m +
+                    ":" +
+                    s +
+                    " ";
+                   t = setTimeout(time, 1000); //设定定时器，循环运行     
+               }
+        
+            </script>
+
+    </div>
+    <div class="tu1" id="tu1"></div>
+            <script>
+                
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById("tu1"));
+        var option = {
+            grid: {
+                   left: '0',
+                   top: '40',
+                   right: '0',
+                   bottom: '10',
+                   width:"50%",
+                   containLabel: true
+               },
+                 /*  legend: {
+                       top: 0,
+                       left:"center",
+                       textStyle: {
+                       color: "#fff",
+                   },       
+                   },*/
+           
+                   tooltip: {
+                       trigger: 'axis',
+                       axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                           type: 'line' // 默认为直线，可选为：'line' | 'shadow'
+                       }
+           
+                   },
+           
+                   xAxis: {
+                       type: 'category',
+                       data: ["专业核心课程","专业课程","学科基础","专业选修","通识课程",],
+                       axisTick: { //---坐标轴 刻度
+                           show: true, //---是否显示
+                       },
+           
+                       axisLine: { //---坐标轴 轴线
+                           show: true, //---是否显示
+                           lineStyle: {
+                               color: 'rgba(255,255,255,.1)',         
+                               width: 1,          
+                               type: 'dotted',
+                           },
+           
+                       },
+           
+                       axisLabel: {//X轴文字
+                           textStyle: {
+                               fontSize: 10,
+                               color: '#fff'
+                           },
+           
+                       },
+           
+                   },
+           
+                   yAxis: {
+           
+                       type: 'value',
+           
+                       splitLine: {//分割线
+           
+                           show: true,
+           
+                           lineStyle: {
+                          color: 'rgba(255,255,255,.1)',
+           
+                               width: 1,
+                               type: 'dotted'
+           
+                           }
+           
+                       },
+           
+                       axisLabel: {//Y轴刻度值
+                           formatter: '{value}',
+                           textStyle: {
+                               fontSize: 15,
+                               color: '#fff'
+                           },
+                       },
+                       axisLine: { //---坐标轴 轴线
+                           show: false, //---是否显示
+           
+                       },
+           
+                   },
+                   color: ['#37a2da','#9fe6b8','#e7bcf3','#8378ea'],
+           
+                   series: [{
+                       name: '学期成绩',
+                       type: 'bar',
+                       data: [168,170,88,92,87],
+                       barWidth: 20,
+                       itemStyle: {
+                           normal: {
+                               barBorderRadius: [50,50,0,0],
+                               color: "#446ACF",
+           
+                           }
+           
+                       },
+           
+                   },
+                   {
+                    name: '圆环',
+                    type: 'pie',
+                    
+                    center: ['80%', '60%'],
+                    avoidLabelOverlap: false,
+                   
+                    itemStyle: {
+                        normal: {
+                     shadowBlur: 30,
+                     shadowColor: 'rgba(0, 0, 0, 0.4)'
+                 },
+                      borderColor: '#fff',
+                      borderWidth: 0
+                    },
+                    label: {
+                      show: false,
+                      position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                          show: true,
+                          fontSize: 20,
+                          fontWeight: 'bold'
+                        },
+                      },
+                   
+                      label: {normal: {formatter: '{b} :\n{c}({d}%)'}},
+                    labelLine: {
+                        normal: {
+                             length:5,
+                             length2:15,
+                            lineStyle: { width: 1}
+                        }
+                    },
+                    data: [
+                      { value: 1, name: '优秀' },
+                      { value: 4, name: '良好' },
+                      { value: 5, name: '及格' },
+                      { value: 0, name: '不及格' },
+                    ]
+                  }
+                   
+                ],           
+         };
+    myChart.setOption(option);
+        window.addEventListener("resize",function(){
+            myChart.resize();
+        });
+    //柱状图更换数据
+    var dataAll = [
+            {year: "大一上", data: [168,170,88,92,87] },
+            { year: "大一下", data: [98,160,188,82,85] },
+            { year: "大二上", data: [152,128,80,90,81] },
+            { year: "大二下", data: [158,175,82,81,80] },
+            { year: "大三上", data: [180,173,160,92,0] },
+          ];
+
+          //饼图更换数据
+          var dataAll1 = [
+            {year:"大一上",data:[
+            { value: 1, name: '优秀' },
+            { value: 4, name: '良好' },
+            { value: 5, name: '及格' },
+            { value: 0, name: '不及格' }]},
+            {year:"大一下",data:[
+                { value: 3, name: '优秀' },
+                { value: 2, name: '良好' },
+                { value: 3, name: '及格' },
+                { value: 0, name: '不及格' }]},
+                {year:"大二上",data:[
+                    { value: 1, name: '优秀' },
+                    { value: 5, name: '良好' },
+                    { value: 4, name: '及格' },
+                    { value: 0, name: '不及格' }]},
+                    {year:"大二下",data:[
+                        { value: 2, name: '优秀' },
+                        { value: 3, name: '良好' },
+                        { value: 5, name: '及格' },
+                        { value: 0, name: '不及格' }]},
+                        {year:"大三上",data:[
+                            { value: 3, name: '优秀' },
+                            { value: 3, name: '良好' },
+                            { value: 2, name: '及格' },
+                            { value: 0, name: '不及格' }]}
+          ];
+
+          $(".box h3 ").on("click", "a", function() {
+            option.series[0].data = dataAll[$(this).index()].data;
+            myChart.setOption(option);
+          });
+          $(".box h3 ").on("click", "a", function() {
+            option.series[1].data = dataAll1[$(this).index()].data;
+            myChart.setOption(option);
+          });
+        
+            </script>
+            
+        </div>
+</body> 
+</html>

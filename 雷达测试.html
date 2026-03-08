@@ -1,0 +1,168 @@
+option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        // Use axis to trigger tooltip
+        type: '' // 'shadow' as default; can also be 'line' or 'shadow'
+      }
+    },
+    legend:{
+        orient: 'vertical',
+        textStyle:{
+            fontSize:8,
+            color:"#fff"
+    },
+    left:"right",
+    itemStyle: {
+        normal: {
+            shadowBlur: 30,
+            shadowColor: 'rgba(0, 0, 0, 0.4)'
+        }
+
+    }, 
+},
+   grid: {
+          left: '0',
+          top:"13%",
+          right: '0',
+          bottom: '0%',
+         containLabel: true
+      },
+    xAxis: {
+      type: 'value',
+       show: false
+    },
+    yAxis: {
+      type: 'category',
+      data: ['小航（男）', '小雪（女）', '小娇（女）', '小雨（男）', '小寒（女）', '小杰（男）'],
+      inverse: true,
+          axisLine: { show: false},
+          splitLine:{ show: false},
+          axisTick:{ show: false},
+     axisLabel: {
+              textStyle: {
+                  color:"#fff"
+              },
+          },
+           
+    },
+    series: [
+      {
+        name: '体重',
+        type: 'bar',
+         yAxisIndex: 0,
+        stack: 'total',
+        barWidth: 20,
+        itemStyle:{
+            barBorderRadius: [50,0,0,50],
+            color:"rgba(35, 184, 194, 1)"
+        },
+        label: {
+          show: true,
+           normal: {
+                  show: true,
+                  formatter: '{c}',
+              }
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [132,92,95,140,92,133]
+      },
+      
+      {
+        name: '年龄',
+        type: 'bar',
+        stack: 'total',
+        
+        label: {
+          show: true
+        },
+        itemStyle:{    
+            color:"rgba(211, 120, 34, 1)"
+    
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [18, 25, 26,19,22,23]
+      },
+      
+      {
+        name: '身高',
+        type: 'bar',
+        stack: 'total',
+        itemStyle:{
+            barBorderRadius: [0,50,50,0],
+            color:"rgba(187, 190, 33, 1)"
+        },
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [181,175,163,179,164,175]
+      }
+    ]
+  };
+
+
+
+
+
+
+
+
+
+
+  *********************************************
+
+
+  var option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: '{a} <br/>{b} : {c}%'
+    },
+color:[ "rgba(152, 198, 25, 1)","rgba(29, 149, 190, 1)","rgba(190, 160, 29, 1)","rgba(208, 218, 61, 0.5)"],
+    series: [
+      {
+        name: 'Funnel',
+        type: 'funnel',
+        width: '30%',
+        height: '35%',
+        left: '40%',
+        top: '5%',
+        colorBy: "data",
+        label: {
+          position: 'left'
+        },
+        data: [
+          { value: 60, name: '寒假兼职' },
+          { value: 30, name: '课外兼职' },
+          { value: 10, name: '节日红包' },
+          { value: 80, name: '暑假兼职' },
+          { value: 100, name: '父母资助' }
+        ]
+      },
+      {
+        name: 'Pyramid',
+        type: 'funnel',
+        width: '30%',
+        height: '35%',
+        left: '40%',
+        top: '40%',
+        sort: 'ascending',
+        label: {
+          position: 'right'
+        },
+        data: [
+          { value: 60, name: '吃饭开销' },
+          { value: 30, name: '学习开销' },
+          { value: 10, name: '护肤品开销' },
+          { value: 80, name: '生活用品开销' },
+          { value: 100, name: '衣服开销' }
+        ]
+      }
+    ]
+  };
